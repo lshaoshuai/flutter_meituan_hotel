@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "99491876076",
+    "firebase_url": "https://hotel-2341b.firebaseio.com",
+    "project_id": "hotel-2341b",
+    "storage_bucket": "hotel-2341b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99491876076:android:b879ecd37fc1f7d3",
+        "android_client_info": {
+          "package_name": "com.luo.hotel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99491876076-a1cpgbmmvi2rbvmr9bdmvih3oj3rvpr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXr6ARNwN-j59V70agPgk3-lyadFgHzHo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "99491876076-a1cpgbmmvi2rbvmr9bdmvih3oj3rvpr7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
