@@ -73,6 +73,9 @@ class _RoomOrderPagePageState extends State<RoomOrderPage>{
                         ),
                       ),
                       Container(
+                        height: 80,
+                        width: _media.width * 0.9,
+                        color: Colors.grey,
                         margin: EdgeInsets.only(top: 80.0),
                         child: Text(
                           '七彩假日酒店公寓',
@@ -83,7 +86,63 @@ class _RoomOrderPagePageState extends State<RoomOrderPage>{
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 80.0),
+                        height: 200,
+                        width: _media.width,
+                        color: Colors.grey,
+                        margin: EdgeInsets.only(top: 10.0),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 50,
+                              child: Text('房间数'),
+
+                            ),
+                            Container(
+                                height: 50,
+                              child: Text('房间数'),
+                            ),
+                            Container(
+                                height: 50,
+                              child: Text('房间数'),
+                            ),
+                            Container(
+                                height: 50,
+                              child: Text('房间数'),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 150,
+                        width: _media.width,
+                        color: Colors.grey,
+                        margin: EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          '七彩假日酒店公寓',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 80,
+                        width: _media.width,
+                        color: Colors.grey,
+                        margin: EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          '七彩假日酒店公寓',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 180,
+                        width: _media.width,
+                        color: Colors.grey,
+                        margin: EdgeInsets.only(top: 10.0),
                         child: Text(
                           '七彩假日酒店公寓',
                           style: TextStyle(
@@ -104,8 +163,8 @@ class _RoomOrderPagePageState extends State<RoomOrderPage>{
             key: _mTitleKey,
           ),
           Container(
-            margin: EdgeInsets.only(top: _media.height - 70.0),
-            height: 70.0,
+            margin: EdgeInsets.only(top: _media.height - 65.0),
+            height: 65.0,
             color: Colors.white,
             child: Column(
               children: <Widget>[
@@ -142,9 +201,10 @@ class _RoomOrderPagePageState extends State<RoomOrderPage>{
                         ],
                       ),
                     ),
+
                     Container(
                       width: _media.width * 0.5,
-                      height: 70.0,
+                      height: 65.0,
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
                             colors: [Colors.deepOrangeAccent, Colors.redAccent]

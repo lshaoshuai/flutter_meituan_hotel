@@ -52,9 +52,16 @@ class _OrderitemState extends State<Orderitem> {
               MyDivider(height: 0,indent: _media.width / 15, endindent: _media.width / 15,),
               Row(
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(left: _media.width / 15,top: 10),
-                    child: Image.asset('assets/images/beijing1.png',height: 100,width: 50,),
+                  Container(
+                    margin: EdgeInsets.only(left: _media.width / 15,top: 10),
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/1.jpg',)
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(5))
+                    ),
                   ),
                   Expanded(
                     child: Column(

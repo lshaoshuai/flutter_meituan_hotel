@@ -36,19 +36,18 @@ class CustomTitleBarState extends State<CustomTitleBar> {
         alignment: Alignment.center,
         child: Row(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(right: 5),
+            Container(
               child: Icon(
                 Icons.four_k,
                 color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.red.withAlpha(_controller.value.alpha),
               ),
             ),
             Semantics(
-              child: Text('鸿少酒店',
+              child: Text('边度酒店',
                 style: TextStyle(
                   fontSize: 20,
                   color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) :Colors.black.withAlpha(_controller.value.alpha),
-                  fontWeight: FontWeight.w200,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),

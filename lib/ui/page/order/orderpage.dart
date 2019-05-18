@@ -20,7 +20,8 @@ class _OrderPageState extends State<OrderPage> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white70,
+          backgroundColor: Colors.white,
+          elevation: 0.5,
           actions: <Widget>[
             GestureDetector(
               onTap: () =>{

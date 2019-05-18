@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel/common/tu_chong_repository.dart';
 import 'package:hotel/common/tu_chong_source.dart';
 import 'package:hotel/ui/page/first/customtilebar.dart';
+import 'package:hotel/ui/widget/bottom_pop/timebottompop.dart';
 import 'package:hotel/ui/widget/stack_appbar/hotel_appbar.dart';
 import '../../widget/MyDivider.dart';
 import '../../widget/loading_more/loading_more_list.dart';
@@ -125,7 +126,7 @@ class _HotelDetailPageState extends State<HotelDetailPage>{
                               children: <Widget>[
                                 Container(
                                   child: Text(
-                                    'qweqwe',
+                                    '七彩假日旅馆(东北林业大学)',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 30
@@ -134,22 +135,95 @@ class _HotelDetailPageState extends State<HotelDetailPage>{
                                 ),
                                 Container(
                                   child: Text(
-                                    'qweqwe',
+                                    '秋林果戈里大街附近',
                                     softWrap: true,
                                   ),
                                 ),
-                                Container(
-                                  child: Text(
-                                      'qweqwe'
-                                  ),
-                                ),
-                                Container(
-                                  child: Text(
-                                      'qweqwe'
-                                  ),
+                                MyDivider(height: 0,width: 0.5,endindent: 30,indent: 30,),
+                                GestureDetector(
+                                    child: Row(
+                                      children: <Widget>[
+                                        Container(
+                                          width: _media.width/2,
+                                          height: 60,
+                                          child: Text(
+                                              '专享抵用卷'
+                                          ),
+                                        ) ,
+                                        Container(
+                                          width: _media.width/2,
+                                          alignment: Alignment.centerRight,
+                                          height: 60,
+                                          child: Text(
+                                              '已领取'
+                                          ),
+                                        ) ,
+                                      ],
+                                    )
                                 ),
                                 MyDivider(height: 0,width: 0.5,),
+                                InkWell(
+                                    onTap: (){
+                                      showModalBottomSheet(
+                                          context: context,
+                                          builder: (BuildContext context){
+                                            //showModalBottomSheet默认点击子widget收起，加一个GestureDetector并设置onTap为false阻断点击事件
+                                            return GestureDetector(
+                                              onTap: () => false,
+                                              child: TimeBottomPop(),
+                                            );
+                                          }
+                                      );
+                                      setState(() {
+                                        print(1);
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 30,
+                                      child:Row(
+                                        children: <Widget>[
+                                          Container(
+                                            child: Text(
+                                              '5月8日 ',
+                                              style:TextStyle(
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            padding: EdgeInsets.only(left:20,top: 3),
+                                          ),
 
+                                          Container(
+                                            child:Text(
+                                              '5月9日',
+                                              style:TextStyle(
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            padding: EdgeInsets.only(left: 20,top: 3),
+                                          ),
+                                          Expanded(
+                                              child: Container(
+                                                alignment: Alignment.centerRight,
+                                                child: Text(
+                                                  '共'+'1'+'晚',
+                                                  style: TextStyle(color: Colors.black,fontSize: 11),
+                                                ),
+                                              )
+                                          ),
+                                          Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsets.only(left: 0),
+                                                child:Icon(
+                                                    Icons.keyboard_arrow_right,
+                                                    size: 20,
+                                                    color: Colors.grey),
+                                              )
+                                          ),
+
+                                        ],
+                                      ),
+                                    )
+                                ),
                               ],
                             ),
                           ),
@@ -159,12 +233,12 @@ class _HotelDetailPageState extends State<HotelDetailPage>{
                   ),
                 ),
                 SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                        (context,int index){
-                          return RoomItem();
-                        },
-                        childCount: 2
-                    ),
+                  delegate: SliverChildBuilderDelegate(
+                          (context,int index){
+                        return RoomItem();
+                      },
+                      childCount: 4
+                  ),
                 )
 //                LoadingMoreSliverList(
 //                    SliverListConfig<TuChongItem>(

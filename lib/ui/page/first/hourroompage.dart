@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel/ui/widget/bottom_pop/timebottompop.dart';
 
 import '../../widget/bottom_pop/bottompop.dart';
 import '../../widget/MyDivider.dart';
@@ -74,7 +75,11 @@ class _HourroomPageState extends State<HourroomPage> {
               showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context){
-                    return BottomPop();
+                    //showModalBottomSheet默认点击子widget收起，加一个GestureDetector并设置onTap为false阻断点击事件
+                    return GestureDetector(
+                      onTap: () => false,
+                      child: TimeBottomPop(),
+                    );
                   }
               );
               setState(() {
@@ -89,38 +94,68 @@ class _HourroomPageState extends State<HourroomPage> {
                     width:_media.width * 0.85,
                     child: Row(
                       children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              child: Text('今天入住',style: TextStyle(color: Colors.red),),
-                              padding: EdgeInsets.only(left: 10,top: 10),
-                            ),
-                            Padding(
-                              child:Text(
-                                '5月8日',
-                                style:TextStyle(
-                                  fontSize: 20,
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          width: _media.width * 0.85 * 0.3,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                child: Text('今天入住',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.red
+                                  ),
                                 ),
+                                padding: EdgeInsets.only(left: 10,top: 10),
                               ),
-                              padding: EdgeInsets.only(left:20,top: 5),
-                            )
-                          ],
-                        ),                  Column(
-                          children: <Widget>[
-                            Container(
-                              child: Text('明天入住',style: TextStyle(color: Colors.red),),
-                              padding: EdgeInsets.only(left: 40,top: 10),
-                            ),
-                            Padding(
-                              child:Text(
-                                '5月9日',
-                                style:TextStyle(
-                                  fontSize: 20,
+                              Container(
+                                child: Text(
+                                  '5月8日 ',
+                                  style:TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
+                                padding: EdgeInsets.only(left:20,top: 3),
                               ),
-                              padding: EdgeInsets.only(left: 50,top: 5),
+
+                            ],
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          width:_media.width * 0.85 * 0.3,
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                child: Text('明天入住',
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.red
+                                  ),
+                                ),
+                                padding: EdgeInsets.only(left: 10,top: 10),
+                              ),
+                              Container(
+                                child:Text(
+                                  '5月9日',
+                                  style:TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                padding: EdgeInsets.only(left: 20,top: 3),
+                              ),
+
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                            child: Container(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                '共'+'1'+'晚',
+                                style: TextStyle(color: Colors.black,fontSize: 11),
+                              ),
                             )
-                          ],
                         )
                       ],
                     ) ,
