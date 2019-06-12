@@ -1,10 +1,15 @@
+import 'package:dio/dio.dart';
+import 'package:hotel/entity/hotelview.dart';
+import 'package:hotel/entity/roomview.dart';
 import 'package:http_client_helper/http_client_helper.dart';
 import '../ui/widget/loading_more/loading_more_list.dart';
 import '../common/tu_chong_source.dart';
 import 'dart:async';
 import 'dart:convert';
 
-class TuChongRepository extends LoadingMoreBase<TuChongItem> {
+import 'api.dart';
+
+class TuChongRepository extends LoadingMoreBase<HotelView> {
   int pageindex = 1;
 
   @override
@@ -40,31 +45,33 @@ class TuChongRepository extends LoadingMoreBase<TuChongItem> {
   Future<bool> loadData([bool isloadMoreAction = false]) async {
     // TODO: implement getData
     String url = "";
+    Dio dio = new Dio();
     if (this.length == 0) {
-      url = "https://api.tuchong.com/feed-app";
+      url = HOTEL_URL;
     } else {
-      int lastPostId = this[this.length - 1].post_id;
-      url = "https://api.tuchong.com/feed-app?post_id=${lastPostId}&page=${pageindex}&type=loadmore";
+      url = HOTEL_URL;
     }
     bool isSuccess = false;
     try {
       //to show loading more clearly, in your app,remove this
-      await Future.delayed(Duration(milliseconds: 500, seconds: 1));
+//      await Future.delayed(Duration(milliseconds: 500, seconds: 1));
 
-      var result = await HttpClientHelper.get(url);
+      var result = await dio.post(url);
 
-      var source = TuChongSource.fromJson(json.decode(result.body));
+      var source = HotelView.fromJson(result.data);
       if (pageindex == 1) {
         this.clear();
       }
 
-      source.feedList.forEach((item) {
-        if (item.hasImage && !this.contains(item) && hasMore) {
-          this.add(item);
-        }
-      });
+      this.add(source);
 
-      _hasMore = source.feedList.length != 0;
+//      source.feedList.forEach((item) {
+//        if (item.hasImage && !this.contains(item) && hasMore) {
+//          this.add(item);
+//        }
+//      });
+
+      _hasMore = true;
       pageindex++;
 //      this.clear();
 //      _hasMore=false;

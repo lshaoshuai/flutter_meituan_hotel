@@ -13,5 +13,6 @@ class Application {
   static navigateTo({ @required BuildContext context, @required String route, transition = TransitionType.inFromRight }) {
     router.navigateTo(context, route, transition: transition);
   }
+
 }
 

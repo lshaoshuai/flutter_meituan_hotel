@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:hotel/common/api.dart';
 
 class MySwiper extends StatefulWidget {
   @override
@@ -11,6 +12,8 @@ class MySwiper extends StatefulWidget {
 
 class _MySwiperState extends State<MySwiper> with SingleTickerProviderStateMixin{
 
+  List<String> bannerlists = [BASE_URL + HOTEL_BASE_PORT + '/image/banner1.jpg',BASE_URL + HOTEL_BASE_PORT +  '/image/banner2.jpg',BASE_URL + HOTEL_BASE_PORT +  '/image/banner3.jpg',
+  BASE_URL + HOTEL_BASE_PORT +  '/image/banner3.jpg'];
 
   TabController tabController;
   var currentPage = 0;
@@ -54,15 +57,15 @@ class _MySwiperState extends State<MySwiper> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-       margin: EdgeInsets.only(top: 30,bottom: 15),
-        height: 130,
-        width: 500,
+        margin: EdgeInsets.only(top: 30,bottom: 15),
+        height: 110,
+        width: 450,
         child: Column(
           children: <Widget>[
             Expanded(
               child: PageView.builder(
                   controller: pageController,
-                  itemCount: tablist.length,
+                  itemCount: bannerlists.length,
                   onPageChanged: (index) {
                     if (isPageCanChanged) {//由于pageview切换是会回调这个方法,又会触发切换tabbar的操作,所以定义一个flag,控制pageview的回调
                       onPageChange(index);
@@ -70,18 +73,21 @@ class _MySwiperState extends State<MySwiper> with SingleTickerProviderStateMixin
                   },
                   itemBuilder: (BuildContext context, int index){
                     return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          image: DecorationImage( fit: BoxFit.cover,image: AssetImage('assets/images/3.jpg')),
-                          borderRadius: BorderRadius.circular(8.0)
-                      ),
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(bannerlists[index])
+                            ),
+                            borderRadius: BorderRadius.circular(8.0)
+                        )
                     );
                   }
               ) ,
             ),
             TabPageSelector(
-              color: Colors.redAccent,
+              color: Colors.redAccent.withAlpha(200),
               indicatorSize: 8,
               controller: tabController,
             ),

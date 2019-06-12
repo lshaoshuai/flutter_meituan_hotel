@@ -88,7 +88,9 @@ class _FindPageState extends  State<FindPage> {
         child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
             ///设置主题颜色
-            child: Theme(data: new ThemeData(primaryColor: Colors.black54, hintColor: Colors.black54), child: TextField(
+            child: Theme(
+                data: new ThemeData(primaryColor: Colors.black54, hintColor: Colors.black54),
+                child: TextField(
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
                     fillColor: Colors.transparent.withOpacity(0.2),

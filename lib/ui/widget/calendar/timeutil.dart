@@ -65,17 +65,29 @@ class TimeUtil {
     return (weekdayFromMonday - firstDayOfWeekFromMonday) % 7;
   }
 
+  static int computeFinalDayOffset(int year, int month,MaterialLocalizations localizations) {
+    final int daysInMonth = getDaysInMonth(year, month);
+    final int firstDayOffset = computeFirstDayOffset(year, month, localizations);
+    return (daysInMonth % 7 + firstDayOffset) %7 ;
+
+  }
   /// 获取天
   static List getDay(int year, int month, MaterialLocalizations localizations) {
     List labels = [];
     final int daysInMonth = getDaysInMonth(year, month);
-    final int firstDayOffset =
-    computeFirstDayOffset(year, month, localizations);
+    final int firstDayOffset = computeFirstDayOffset(year, month, localizations);
+    final int fianlDayOffset = computeFinalDayOffset(year, month, localizations);
     for (int i = 0; true; i += 1) {
       // 1-based day of month, e.g. 1-31 for January, and 1-29 for February on
       // a leap year.
       final int day = i - firstDayOffset + 1;
-      if (day > daysInMonth) break;
+      //最后超出范围后面补齐零
+      if (day > daysInMonth ){
+        for(int j = 0;j < 7 - fianlDayOffset;j++) {
+          labels.add(0);
+        }
+        break;
+      }
       if (day < 1) {
         labels.add(0);
       } else {

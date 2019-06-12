@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel/common/item_builder.dart';
-import 'package:hotel/common/tu_chong_source.dart';
-import "package:pull_to_refresh/pull_to_refresh.dart";
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:hotel/entity/hotelview.dart';
 import '../../widget/MyDivider.dart';
 import '../hotely/hotel_item.dart';
 import '../../widget/loading_more/loading_more_list.dart';
@@ -136,8 +132,20 @@ class _FirstPageState extends State<FirstPage>  with SingleTickerProviderStateMi
                       Stack(
                         children: <Widget>[
                           Container(
-                            height: 250,
-                            color:Colors.red,
+                              height: _media.height * 0.33,
+                              decoration: new BoxDecoration(
+                                //渐变色
+                                  gradient: new LinearGradient(
+                                      colors: [
+                                        Colors.red.withAlpha(230),
+                                        Colors.redAccent.withAlpha(220),
+                                      ],
+                                      begin: const FractionalOffset(0.2, 0.0),
+                                      end: const FractionalOffset(1.0, 1.0),
+                                      stops: [0.0, 1.0],
+                                      tileMode: TileMode.clamp
+                                  )
+                              )
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 80, left: _media.width / 2 - cardwt / 2),
@@ -158,11 +166,13 @@ class _FirstPageState extends State<FirstPage>  with SingleTickerProviderStateMi
                                       labelPadding: EdgeInsets.symmetric(horizontal: _media.width / 35),
                                       unselectedLabelColor: Color(0xff666666),
                                       unselectedLabelStyle: TextStyle(
+                                        fontFamily: 'jindian',
                                         fontSize: _media.width / 22,
                                       ),
                                       labelStyle: TextStyle(
+                                        fontFamily: 'jindian',
                                         fontSize: _media.width / 23,
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                       tabs: tablist.map((item) {
                                         return Tab(
@@ -185,7 +195,7 @@ class _FirstPageState extends State<FirstPage>  with SingleTickerProviderStateMi
                   ),
                 ),
                 LoadingMoreSliverList(
-                    SliverListConfig<TuChongItem>(
+                    SliverListConfig<HotelView>(
                       itemBuilder:  itemBuilder,
                       sourceList: listSourceRepository,
                       //isLastOne: false
@@ -203,6 +213,6 @@ class _FirstPageState extends State<FirstPage>  with SingleTickerProviderStateMi
     );
   }
 
-  Widget itemBuilder(BuildContext context,TuChongItem item, int index) => HotelItem();
+  Widget itemBuilder(BuildContext context,HotelView item, int index) => HotelItem(hotelView: item,);
 
 }

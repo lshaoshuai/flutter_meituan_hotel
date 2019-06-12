@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import '../../widget/MyDivider.dart';
 
 class HotelAppBar extends StatefulWidget {
+
   final Key key;
   final double height;
-
+  final String hotelTitle;
   final HotelBarController controller;
   final GestureTapCallback onMenuTap;
   final GestureTapCallback onMessageTap;
@@ -15,7 +16,9 @@ class HotelAppBar extends StatefulWidget {
     this.onMessageTap,
     this.controller,
     this.height: 65.0,
-    this.key
+    this.key,
+    this.hotelTitle
+
   }) :super(key: key);
 
   @override
@@ -56,41 +59,37 @@ class HotelAppBarState extends State<HotelAppBar> {
               },
               child: new InkWell(
                 child: Container(
-                  padding: EdgeInsets.only(left: 10,top: 15),
+                  padding: EdgeInsets.only(left: 10),
                   child: new Icon(
-                    Icons.arrow_back,
+                    Icons.arrow_back_ios,
+                    size: _media.width / 18,
                     color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.black.withAlpha(_controller.value.alpha),
                   ),
                 ),
               ),
             ),
-            new GestureDetector(
-              onTap: widget.onMessageTap==null?(){}: widget.onMessageTap,
-              child: new InkWell(
-                child: Container(
-                  padding: EdgeInsets.only(left: 10,top: 15),
-                  child: new Icon(
-                    Icons.star_border,
-                    color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.black.withAlpha(_controller.value.alpha),
-                  ),
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(
+                widget.hotelTitle,
+                style: TextStyle(
+                    color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(0) : Colors.black.withAlpha(_controller.value.alpha),
+                    fontSize: _media.width / 20
                 ),
               ),
             ),
-            new GestureDetector(
-              onTap: widget.onMessageTap==null?(){}: widget.onMessageTap,
-              child: new InkWell(
-                  child: Container(
-                      padding: EdgeInsets.only(top: 15,right: 15),
-                      child: Column(
-                        children: <Widget>[
-                          Icon(
-                            Icons.share,
-                            color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.black.withAlpha(_controller.value.alpha),
-                          ),
-                        ],
-                      )
-                  )
-              ),
+            GestureDetector(
+                onTap: widget.onMessageTap==null?(){}: widget.onMessageTap,
+                child: new InkWell(
+                    child: Container(
+                      padding: EdgeInsets.only(right: 15),
+                      child: Icon(
+                        Icons.share,
+                        size: _media.width / 18,
+                        color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.black.withAlpha(_controller.value.alpha),
+                      ),
+                    )
+                )
             ),
           ],
         ),

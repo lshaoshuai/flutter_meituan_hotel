@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'route/routes.dart';
 import 'models/state_model/main_state_model.dart';
 import 'config/application.dart';
 import 'ui/page/mainpage.dart';
-void main() => runApp(App());
+
+void main() {
+  runApp(App());
+}
 
 
 class App extends StatefulWidget {
@@ -21,6 +25,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App>  with AutomaticKeepAliveClientMixin{
 
   MainStateModel mainStateModel;
+  String token;
 
   @override
   bool get wantKeepAlive => true;
@@ -33,11 +38,23 @@ class _AppState extends State<App>  with AutomaticKeepAliveClientMixin{
     final Router router = Router();
     Routes.configureRoutes(router);
     Application.router = router;
+    saveStorageString('18846086270','1111');
+
   }
+
+  Future saveStorageString(key,value) async {
+    print("save");
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString(
+        key, value);
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
     //状态管理
     return ScopedModel<MainStateModel>(
         model: mainStateModel,

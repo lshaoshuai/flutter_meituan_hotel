@@ -8,7 +8,7 @@ class MyDivider extends StatelessWidget {
     Key key,
     this.height = 16.0,
     this.indent = 0.0,
-    this.width = 1.0,
+    this.width = 0.5,
     this.endindent = 0.0,
     this.color
   }) : assert(height >= 0.0),

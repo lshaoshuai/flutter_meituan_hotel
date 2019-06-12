@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:hotel/config/application.dart';
-import 'package:hotel/route/routes.dart';
+import 'package:hotel/common/constant.dart';
+import 'package:hotel/entity/hotelview.dart';
+
+import 'hotel_detail_page.dart';
 
 class HotelItem extends StatelessWidget{
+
+  HotelView hotelView;
+  HotelItem({@required this.hotelView});
+  String hotelname = "";
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return _itemwidget(context);
   }
 
-  _navigate(BuildContext context, String route) {
-    Application.navigateTo(context: context, route: route);
-  }
 
   _itemwidget(context){
 
+    final _media = MediaQuery.of(context).size;
+
     return InkWell(
       onTap: (){
-        _navigate(context, '${Routes.hoteldetailpage}');
+        Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+          return HotelDetailPage(hotelView: hotelView);
+        }));
       },
       child: Container(
         child: Row(
@@ -43,9 +51,10 @@ class HotelItem extends StatelessWidget{
                       alignment: Alignment.topLeft,
                       margin: EdgeInsets.only(bottom: 5,left: 10),
                       child: Text(
-                        '七彩假日旅馆(东北林业大学)',
+                        hotelView.hotel_name??"",
                         style: TextStyle(
                             fontSize: 18,
+                            fontFamily: fontname,
                             fontWeight: FontWeight.w500
                         ),
                       ),
@@ -68,6 +77,7 @@ class HotelItem extends StatelessWidget{
                               child: Text(
                                 '好房价干净温度合适',
                                 style: TextStyle(
+                                    fontFamily: fontname,
                                     color: Colors.blueAccent,
                                     fontSize: 13
                                 ),
@@ -93,7 +103,8 @@ class HotelItem extends StatelessWidget{
                       child: Text(
                         '秋林果戈里大街附近',
                         style: TextStyle(
-                            fontSize: 13
+                            fontSize: 13,
+                          fontFamily: fontname,
                         ),
                       ),
                     ),
@@ -154,7 +165,7 @@ class HotelItem extends StatelessWidget{
                       alignment: Alignment.bottomRight,
                       padding: EdgeInsets.only(bottom: 0,right: 10),
                       child: Text(
-                        '\$88',
+                        '￥' + '88',
                         style: TextStyle(
                             color: Colors.red,
                             fontSize: 23

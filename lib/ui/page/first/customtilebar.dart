@@ -32,20 +32,22 @@ class CustomTitleBarState extends State<CustomTitleBar> {
     final _media = MediaQuery.of(context).size;
 
     return Container(
-        padding: EdgeInsets.only(left: _media.width * 0.38,top: 15),
+        padding: EdgeInsets.only(left: _media.width * 0.35,top: 15),
         alignment: Alignment.center,
         child: Row(
           children: <Widget>[
             Container(
               child: Icon(
-                Icons.four_k,
-                color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.red.withAlpha(_controller.value.alpha),
+                Icons.spa,
+                color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.redAccent.withAlpha(_controller.value.alpha),
               ),
             ),
             Semantics(
-              child: Text('边度酒店',
+              child: Text(
+                '边度酒店',
                 style: TextStyle(
                   fontSize: 20,
+                  fontFamily: 'jindian',
                   color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) :Colors.black.withAlpha(_controller.value.alpha),
                   fontWeight: FontWeight.w600,
                 ),
@@ -67,9 +69,9 @@ class CustomTitleBarState extends State<CustomTitleBar> {
           color: Colors.white.withAlpha(_controller.value.alpha),
           border: Border(
               bottom: BorderSide(
-                color: Colors.black,
-                width: 0.1,
-                style: _controller.value.alpha < 255/2 ? BorderStyle.none :BorderStyle.solid
+                  color: Colors.black,
+                  width: 0.1,
+                  style: _controller.value.alpha < 255/2 ? BorderStyle.none :BorderStyle.solid
               )
           )
       ),
@@ -86,7 +88,7 @@ class CustomTitleBarState extends State<CustomTitleBar> {
                   padding: EdgeInsets.only(left: 10,top: 15),
                   child: new Icon(
                     Icons.cloud,
-                    color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.red.withAlpha(_controller.value.alpha),
+                    color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.redAccent.withAlpha(_controller.value.alpha),
                   ),
                 ),
               ),
@@ -94,24 +96,25 @@ class CustomTitleBarState extends State<CustomTitleBar> {
             new GestureDetector(
               onTap: widget.onMessageTap==null?(){}: widget.onMessageTap,
               child: new InkWell(
-                child: Container(
-                  padding: EdgeInsets.only(top: 15,right: 15),
-                  child: Column(
-                    children: <Widget>[
-                      Icon(
-                        Icons.notifications,
-                        color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.red.withAlpha(_controller.value.alpha),
-                      ),
-                      Text(
-                        '客服',
-                        style: TextStyle(
-                          fontSize: 10,
-                            color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.red.withAlpha(_controller.value.alpha)
-                        ),
+                  child: Container(
+                      padding: EdgeInsets.only(top: 15,right: 15),
+                      child: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.notifications,
+                            color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.redAccent.withAlpha(_controller.value.alpha),
+                          ),
+                          Text(
+                            '客服',
+                            style: TextStyle(
+                                fontSize: 10,
+                                fontFamily: 'jindian',
+                                color: _controller.value.alpha < 255/2 ? Colors.white.withAlpha(255 - _controller.value.alpha) : Colors.redAccent.withAlpha(_controller.value.alpha)
+                            ),
+                          )
+                        ],
                       )
-                    ],
                   )
-                )
               ),
             ),
           ],

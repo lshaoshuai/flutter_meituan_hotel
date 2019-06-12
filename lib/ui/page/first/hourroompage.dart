@@ -1,4 +1,8 @@
+import 'package:city_pickers/city_pickers.dart';
 import 'package:flutter/material.dart';
+import 'package:hotel/common/constant.dart';
+import 'package:hotel/config/application.dart';
+import 'package:hotel/route/routes.dart';
 import 'package:hotel/ui/widget/bottom_pop/timebottompop.dart';
 
 import '../../widget/bottom_pop/bottompop.dart';
@@ -10,11 +14,27 @@ class HourroomPage extends StatefulWidget {
 }
 
 class _HourroomPageState extends State<HourroomPage> {
+
+  Result result = new Result();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return _mainpage(context);
   }
+
+  showMap() async {
+    result = await CityPickers.showCityPicker(
+      context: context,
+    );
+    if(result == null){
+      result = new Result();
+    }
+    setState(() {
+      print(result);
+    });
+  }
+
 
   _mainpage(context){
 
@@ -22,10 +42,8 @@ class _HourroomPageState extends State<HourroomPage> {
     return Column(
       children: <Widget>[
         InkWell(
-            onTap:  (){
-              setState(() {
-                print(1);
-              });
+            onTap: (){
+              showMap();
             },
             child: Container(
               height: 65,
@@ -46,9 +64,10 @@ class _HourroomPageState extends State<HourroomPage> {
                         Container(
                           alignment: Alignment.topLeft,
                           child:Text(
-                            '哈尔滨',
+                            result.cityName == null ? "请选择城市" : result.cityName,
                             style:TextStyle(
-                              fontSize: 18,
+                                fontSize: result.cityName == null ? 15 : 18,
+                                color: result.cityName == null ? Colors.grey : Colors.black
                             ),
                           ),
                           padding: EdgeInsets.only(left: 20,top: 5),
@@ -78,12 +97,20 @@ class _HourroomPageState extends State<HourroomPage> {
                     //showModalBottomSheet默认点击子widget收起，加一个GestureDetector并设置onTap为false阻断点击事件
                     return GestureDetector(
                       onTap: () => false,
-                      child: TimeBottomPop(),
+                      child: TimeBottomPop(
+                        onChange: (m){
+                          print(m);
+                        },
+                      ),
                     );
                   }
-              );
-              setState(() {
-                print(1);
+              ).then((value){
+                setState(() {
+                  if(value!=null && !value.isEmpty){
+                    selectDate = value[0];
+                    secselectDate = value[1];
+                  }
+                });
               });
             },
             child: Container(
@@ -96,23 +123,26 @@ class _HourroomPageState extends State<HourroomPage> {
                       children: <Widget>[
                         Container(
                           alignment: Alignment.centerLeft,
-                          width: _media.width * 0.85 * 0.3,
+                          width: _media.width * 0.85 * 0.4,
                           child: Column(
                             children: <Widget>[
                               Container(
-                                child: Text('今天入住',
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  checksameday(selectDate,DateTime.now())? '今天入住' : '入住',
                                   style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.red
                                   ),
                                 ),
-                                padding: EdgeInsets.only(left: 10,top: 10),
+                                padding: EdgeInsets.only(left: 20,top: 10),
                               ),
                               Container(
+                                alignment: Alignment.topLeft,
                                 child: Text(
-                                  '5月8日 ',
+                                  selectDate.month.toString() + "月" + selectDate.day.toString() + "日",
                                   style:TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                   ),
                                 ),
                                 padding: EdgeInsets.only(left:20,top: 3),
@@ -123,11 +153,13 @@ class _HourroomPageState extends State<HourroomPage> {
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          width:_media.width * 0.85 * 0.3,
+                          width:_media.width * 0.85 * 0.4,
                           child: Column(
                             children: <Widget>[
                               Container(
-                                child: Text('明天入住',
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  checksameday(secselectDate,DateTime.now().add(Duration(days: 1)))?'明天离店': '离店' ,
                                   style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.red
@@ -136,13 +168,14 @@ class _HourroomPageState extends State<HourroomPage> {
                                 padding: EdgeInsets.only(left: 10,top: 10),
                               ),
                               Container(
+                                alignment: Alignment.topLeft,
                                 child:Text(
-                                  '5月9日',
+                                  secselectDate.month.toString() + "月" + secselectDate.day.toString() + "日",
                                   style:TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                   ),
                                 ),
-                                padding: EdgeInsets.only(left: 20,top: 3),
+                                padding: EdgeInsets.only(left: 10,top: 3),
                               ),
 
                             ],
@@ -152,7 +185,7 @@ class _HourroomPageState extends State<HourroomPage> {
                             child: Container(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                '共'+'1'+'晚',
+                                '共'+ secselectDate.difference(selectDate).inDays.toString() +'晚',
                                 style: TextStyle(color: Colors.black,fontSize: 11),
                               ),
                             )
@@ -175,25 +208,52 @@ class _HourroomPageState extends State<HourroomPage> {
         ),
         MyDivider(height: 0,indent: 400 / 30.0,endindent: 400 / 30.0,),
         Container(
-            height:80,
-            width: 480,
-            padding: EdgeInsets.only(left:10.0, right:10.0,top:30.0),
-            child: new RaisedButton(
-              color: Colors.red,
+            height:50,
+            width: 300,
+            margin: EdgeInsets.only(left:10.0,top: 30, right:10.0),
+            child: new FlatButton(
               child: new Padding(
                 padding: EdgeInsets.all(8.0),
                 child: new Text(
                   "查找酒店",
                   style: new TextStyle(
-                      fontFamily: 'HanaleiFill', color: Colors.white, fontSize: 25.0),
+                      fontFamily: 'jindian',
+                      color: Colors.white,
+                      fontSize: 25.0),
                 ),
               ),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-              onPressed: () {},
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)), //圆角大小
+              onPressed: () {
+                Application.navigateTo(context:context, route : "${Routes.hotelpage}");
+              },
+            ),
+            decoration: new BoxDecoration(
+              //渐变色
+                borderRadius: BorderRadius.all(Radius.circular(3)),
+                gradient: new LinearGradient(
+                    colors: [
+                      Colors.deepOrangeAccent,
+                      Colors.redAccent.withAlpha(220),
+                    ],
+                    begin: const FractionalOffset(0.2, 0.0),
+                    end: const FractionalOffset(1.0, 1.0),
+                    stops: [0.0, 1.0],
+                    tileMode: TileMode.clamp
+                )
             )
         ),
       ],
     );
+  }
+  bool checksameday(DateTime datetime,DateTime ct){
+
+    if(datetime.month == ct.month) {
+      if (datetime.day == ct.day){
+        return true;
+      }
+    }
+    return false;
+
   }
 
 }
