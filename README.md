@@ -22,6 +22,10 @@ flutter中一切皆为widget.
 ## UI Screenshot：
 
 
-![首页](https://raw.githubusercontent.com/lshaoshuai/springcloud-config/master/images/hotel2%20(1).png)
+![首页](https://raw.githubusercontent.com/lshaoshuai/springcloud-config/master/images/QQ图片20190611102029.png)
 
-![详情页](https://raw.githubusercontent.com/lshaoshuai/springcloud-config/master/images/hotel2%20(2).png)
+![详情页](https://raw.githubusercontent.com/lshaoshuai/springcloud-config/master/images/QQ图片20190611102145.png)
+
+![详情页](https://raw.githubusercontent.com/lshaoshuai/springcloud-config/master/images/QQ图片20190611102313.png)
+
+![详情页](https://raw.githubusercontent.com/lshaoshuai/springcloud-config/master/images/QQ图片20190611102449.png)
